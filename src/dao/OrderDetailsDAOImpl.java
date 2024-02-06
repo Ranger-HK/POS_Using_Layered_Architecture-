@@ -4,9 +4,8 @@ import model.OrderDetailDTO;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Objects;
 
-public class OrderDetailsDAOImpl implements CrudDAO<OrderDetailDTO,String> {
+public class OrderDetailsDAOImpl implements CrudDAO<OrderDetailDTO, String> {
 
     @Override
     public boolean add(OrderDetailDTO orderDetailDTO) throws SQLException, ClassNotFoundException {
@@ -33,8 +32,4 @@ public class OrderDetailsDAOImpl implements CrudDAO<OrderDetailDTO,String> {
         return null;
     }
 
-    @Override
-    public boolean ifCustomerExist(String s) throws SQLException, ClassNotFoundException {
-        return false;
-    }
 }

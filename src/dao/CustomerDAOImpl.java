@@ -42,12 +42,16 @@ public class CustomerDAOImpl implements CrudDAO<CustomerDTO, String> {
         return allCustomers;
     }
 
-    @Override
-    public boolean ifCustomerExist(String id) throws SQLException, ClassNotFoundException {
-        return crudUtil.executeQuery("SELECT id FROM Customer WHERE id=?", id).next();
-    }
 
-   /* @Override
+
+   /*
+    @Override
+     public boolean ifCustomerExist(String id) throws SQLException, ClassNotFoundException {
+
+      return  crudUtil.executeQuery("SELECT id FROM Customer WHERE id=?",id).next();
+  }
+
+   @Override
     public String generateNewId() throws SQLException, ClassNotFoundException {
         ResultSet rst = crudUtil.executeQuery("SELECT id FROM Customer ORDER BY id DESC LIMIT 1;");
         if (rst.next()) {
@@ -59,6 +63,9 @@ public class CustomerDAOImpl implements CrudDAO<CustomerDTO, String> {
         }
     }*/
 }
+
+
+
 
    /* @Override
     public boolean add(Objects ob) {

@@ -14,6 +14,5 @@ public interface CrudDAO<T, ID> {
 
     ArrayList<T> getAll() throws SQLException, ClassNotFoundException;
 
-    boolean ifCustomerExist(ID id) throws SQLException, ClassNotFoundException;
 }
 
