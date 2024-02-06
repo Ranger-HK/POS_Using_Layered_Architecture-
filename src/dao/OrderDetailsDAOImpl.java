@@ -32,4 +32,9 @@ public class OrderDetailsDAOImpl implements CrudDAO<OrderDetailDTO,String> {
     public ArrayList<OrderDetailDTO> getAll() throws SQLException, ClassNotFoundException {
         return null;
     }
+
+    @Override
+    public boolean ifCustomerExist(String s) throws SQLException, ClassNotFoundException {
+        return false;
+    }
 }

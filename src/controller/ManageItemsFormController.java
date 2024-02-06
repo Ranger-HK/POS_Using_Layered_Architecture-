@@ -74,6 +74,7 @@ public class ManageItemsFormController {
         loadAllItems();
     }
 
+    //Load all Items to tables--->>
     private void loadAllItems() {
         tblItems.getItems().clear();
         try {
@@ -135,7 +136,7 @@ public class ManageItemsFormController {
         txtUnitPrice.setDisable(false);
         txtQtyOnHand.setDisable(false);
         txtCode.clear();
-        txtCode.setText(generateNewId());
+       // txtCode.setText(generateNewId());
         txtDescription.clear();
         txtUnitPrice.clear();
         txtQtyOnHand.clear();
@@ -145,13 +146,15 @@ public class ManageItemsFormController {
         tblItems.getSelectionModel().clearSelection();
     }
 
+
+    /*Delete Item*/
     public void btnDelete_OnAction(ActionEvent actionEvent) {
         /*Delete Item*/
         String code = tblItems.getSelectionModel().getSelectedItem().getCode();
         try {
-            if (!existItem(code)) {
+            /*if (!existItem(code)) {
                 new Alert(Alert.AlertType.ERROR, "There is no such item associated with the id " + code).show();
-            }
+            }*/
            /* Connection connection = DBConnection.getDbConnection().getConnection();
             PreparedStatement pstm = connection.prepareStatement("DELETE FROM Item WHERE code=?");
             pstm.setString(1, code);
@@ -169,6 +172,7 @@ public class ManageItemsFormController {
         }
     }
 
+    //Save Items--->>
     public void btnSave_OnAction(ActionEvent actionEvent) {
         String code = txtCode.getText();
         String description = txtDescription.getText();
@@ -193,9 +197,9 @@ public class ManageItemsFormController {
 
         if (btnSave.getText().equalsIgnoreCase("save")) {
             try {
-                if (existItem(code)) {
+               /* if (existItem(code)) {
                     new Alert(Alert.AlertType.ERROR, code + " already exists").show();
-                }
+                }*/
                 //Save Item
               /*  Connection connection = DBConnection.getDbConnection().getConnection();
                 PreparedStatement pstm = connection.prepareStatement("INSERT INTO Item (code, description, unitPrice, qtyOnHand) VALUES (?,?,?,?)");
@@ -219,9 +223,9 @@ public class ManageItemsFormController {
         } else {
             try {
 
-                if (!existItem(code)) {
+            /*    if (!existItem(code)) {
                     new Alert(Alert.AlertType.ERROR, "There is no such item associated with the id " + code).show();
-                }
+                }*/
                 /*Update Item*/
                /* Connection connection = DBConnection.getDbConnection().getConnection();
                 PreparedStatement pstm = connection.prepareStatement("UPDATE Item SET description=?, unitPrice=?, qtyOnHand=? WHERE code=?");
@@ -251,20 +255,21 @@ public class ManageItemsFormController {
     }
 
 
-    private boolean existItem(String code) throws SQLException, ClassNotFoundException {
-       /* Connection connection = DBConnection.getDbConnection().getConnection();
+    //Update Items--->>
+   /* private boolean existItem(String code) throws SQLException, ClassNotFoundException {
+       *//* Connection connection = DBConnection.getDbConnection().getConnection();
         PreparedStatement pstm = connection.prepareStatement("SELECT code FROM Item WHERE code=?");
         pstm.setString(1, code);
-        return pstm.executeQuery().next();*/
+        return pstm.executeQuery().next();*//*
 
         //ItemDAO itemDAO = new ItemDAOImpl();
        return itemDAO.ifItemExist(code);
     }
 
-
+//    ID Generate-->>
     private String generateNewId() {
         try {
-           /* Connection connection = DBConnection.getDbConnection().getConnection();
+           *//* Connection connection = DBConnection.getDbConnection().getConnection();
             ResultSet rst = connection.createStatement().executeQuery("SELECT code FROM Item ORDER BY code DESC LIMIT 1;");
             if (rst.next()) {
                 String id = rst.getString("code");
@@ -272,7 +277,7 @@ public class ManageItemsFormController {
                 return String.format("I%03d", newItemId);
             } else {
                 return "I001";
-            }*/
+            }*//*
 
             //ItemDAO itemDAO = new ItemDAOImpl();
             itemDAO.generateNewId();
@@ -283,5 +288,5 @@ public class ManageItemsFormController {
             e.printStackTrace();
         }
         return "I001";
-    }
+    }*/
 }

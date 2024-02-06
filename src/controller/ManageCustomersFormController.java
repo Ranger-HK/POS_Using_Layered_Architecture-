@@ -70,6 +70,7 @@ public class ManageCustomersFormController {
         loadAllCustomers();
     }
 
+    /*Load all customers to tables*/
     private void loadAllCustomers() {
         tblCustomers.getItems().clear();
         /*Get all customers*/
@@ -118,12 +119,13 @@ public class ManageCustomersFormController {
         Platform.runLater(() -> primaryStage.sizeToScene());
     }
 
+    //Save customer--->>
     public void btnAddNew_OnAction(ActionEvent actionEvent) {
         txtCustomerId.setDisable(false);
         txtCustomerName.setDisable(false);
         txtCustomerAddress.setDisable(false);
         txtCustomerId.clear();
-        txtCustomerId.setText(generateNewId());
+        //txtCustomerId.setText(generateNewId());
         txtCustomerName.clear();
         txtCustomerAddress.clear();
         txtCustomerName.requestFocus();
@@ -132,7 +134,7 @@ public class ManageCustomersFormController {
         tblCustomers.getSelectionModel().clearSelection();
     }
 
-
+    //Save customer--->>
     public void btnSave_OnAction(ActionEvent actionEvent) {
         String id = txtCustomerId.getText();
         String name = txtCustomerName.getText();
@@ -208,6 +210,7 @@ public class ManageCustomersFormController {
     }
 
 
+    //Update Customer
     boolean existCustomer(String id) throws SQLException, ClassNotFoundException {
       /*  Connection connection = DBConnection.getDbConnection().getConnection();
         PreparedStatement pstm = connect ion.prepareStatement("SELECT id FROM Customer WHERE id=?");
@@ -223,6 +226,7 @@ public class ManageCustomersFormController {
     }
 
 
+    //    Delete Customer----->>>
     public void btnDelete_OnAction(ActionEvent actionEvent) {
         /*Delete Customer*/
         String id = tblCustomers.getSelectionModel().getSelectedItem().getId();
@@ -252,9 +256,10 @@ public class ManageCustomersFormController {
         }
     }
 
-    private String generateNewId() {
+    //    ID Generate-->>
+   /* private String generateNewId() {
         try {
-          /*  Connection connection = DBConnection.getDbConnection().getConnection();
+          *//*  Connection connection = DBConnection.getDbConnection().getConnection();
             ResultSet rst = connection.createStatement().executeQuery("SELECT id FROM Customer ORDER BY id DESC LIMIT 1;");
             if (rst.next()) {
                 String id = rst.getString("id");
@@ -262,10 +267,10 @@ public class ManageCustomersFormController {
                 return String.format("C%03d", newCustomerId);
             } else {
                 return "C001";
-            }*/
+            }*//*
 
-            /*CustomerDAOImpl customerDAO = new CustomerDAOImpl();
-            customerDAO.generateId();*/
+            *//*CustomerDAOImpl customerDAO = new CustomerDAOImpl();
+            customerDAO.generateId();*//*
 
             //CustomerDAO customerDAO = new CustomerDAOImpl();
             customerDAO.generateId();
@@ -285,7 +290,7 @@ public class ManageCustomersFormController {
             return String.format("C%03d", newCustomerId);
         }
 
-    }
+    }*/
 
     private String getLastCustomerId() {
         List<CustomerTM> tempCustomersList = new ArrayList<>(tblCustomers.getItems());
