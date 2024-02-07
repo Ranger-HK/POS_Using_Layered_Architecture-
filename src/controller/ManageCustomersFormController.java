@@ -40,9 +40,9 @@ public class ManageCustomersFormController {
     public JFXTextField txtCustomerAddress;
     public TableView<CustomerTM> tblCustomers;
     public JFXButton btnAddNewCustomer;
-//
+
     private final CrudDAO<CustomerDTO,String> customerDAO =  new CustomerDAOImpl();
-//
+
     public void initialize() {
         tblCustomers.getColumns().get(0).setCellValueFactory(new PropertyValueFactory<>("id"));
         tblCustomers.getColumns().get(1).setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -125,7 +125,7 @@ public class ManageCustomersFormController {
         txtCustomerName.setDisable(false);
         txtCustomerAddress.setDisable(false);
         txtCustomerId.clear();
-        //txtCustomerId.setText(generateNewId());
+        txtCustomerId.setText(generateNewId());
         txtCustomerName.clear();
         txtCustomerAddress.clear();
         txtCustomerName.requestFocus();
