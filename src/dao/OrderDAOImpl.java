@@ -2,14 +2,16 @@ package dao;
 
 import model.OrderDTO;
 
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class OrderDAOImpl implements CrudDAO<OrderDTO, String> {
+public class  OrderDAOImpl implements CrudDAO<OrderDTO, String> {
 
     @Override
     public boolean add(OrderDTO orderDTO) throws SQLException, ClassNotFoundException {
-        return false;
+        return crudUtil.executeUpdate("INSERT INTO `Orders` (oid, date, customerID) VALUES (?,?,?)", orderDTO.getOrderId(), orderDTO.getOrderDate());
+
     }
 
     @Override

@@ -9,17 +9,34 @@ import java.math.BigDecimal;
  **/
 
 public class OrderDetailDTO implements Serializable {
+    private String oid;
     private String itemCode;
     private int qty;
     private BigDecimal unitPrice;
+
+    public OrderDetailDTO(String oid, String itemCode, int qty, BigDecimal unitPrice) {
+        this.setOid(oid);
+        this.setItemCode(itemCode);
+        this.setQty(qty);
+        this.setUnitPrice(unitPrice);
+    }
 
     public OrderDetailDTO() {
     }
 
     public OrderDetailDTO(String itemCode, int qty, BigDecimal unitPrice) {
-        this.itemCode = itemCode;
-        this.qty = qty;
-        this.unitPrice = unitPrice;
+        this.setItemCode(itemCode);
+        this.setQty(qty);
+        this.setUnitPrice(unitPrice);
+    }
+
+
+    public String getOid() {
+        return oid;
+    }
+
+    public void setOid(String oid) {
+        this.oid = oid;
     }
 
     public String getItemCode() {
@@ -49,7 +66,8 @@ public class OrderDetailDTO implements Serializable {
     @Override
     public String toString() {
         return "OrderDetailDTO{" +
-                "itemCode='" + itemCode + '\'' +
+                "oid='" + oid + '\'' +
+                ", itemCode='" + itemCode + '\'' +
                 ", qty=" + qty +
                 ", unitPrice=" + unitPrice +
                 '}';

@@ -3,9 +3,7 @@ package controller;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
-import dao.CrudDAO;
-import dao.CustomerDAOImpl;
-import dao.ItemDAOImpl;
+import dao.*;
 import db.DBConnection;
 import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyObjectWrapper;
@@ -21,6 +19,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import model.CustomerDTO;
 import model.ItemDTO;
+import model.OrderDTO;
 import model.OrderDetailDTO;
 import view.tdm.OrderDetailTM;
 
@@ -59,6 +58,8 @@ public class PlaceOrderFormController {
 
     private CrudDAO<CustomerDTO,String>customerDAO = new CustomerDAOImpl();
     private CrudDAO<ItemDTO,String> itemDAO = new ItemDAOImpl();
+    private CrudDAO<OrderDTO,String >orderDAO = new OrderDAOImpl();
+    private CrudDAO<OrderDetailDTO,String> orderDetailsDAO = new OrderDetailsDAOImpl();
 
     public void initialize() throws SQLException, ClassNotFoundException {
 
@@ -372,26 +373,32 @@ public class PlaceOrderFormController {
             }
 
             connection.setAutoCommit(false);
-            stm = connection.prepareStatement("INSERT INTO `Orders` (oid, date, customerID) VALUES (?,?,?)");
+            //Add order
+
+            OrderDTO orderDTO = new OrderDTO(orderId,orderDate,customerId);
+            boolean add = orderDAO.add(orderDTO);
+
+           /* stm = connection.prepareStatement("INSERT INTO `Orders` (oid, date, customerID) VALUES (?,?,?)");
             stm.setString(1, orderId);
             stm.setDate(2, Date.valueOf(orderDate));
-            stm.setString(3, customerId);
+            stm.setString(3, customerId);*/
 
-            if (stm.executeUpdate() != 1) {
+
+            if (!add) {
                 connection.rollback();
                 connection.setAutoCommit(true);
                 return false;
             }
 
-            stm = connection.prepareStatement("INSERT INTO OrderDetails (oid, itemCode, unitPrice, qty) VALUES (?,?,?,?)");
+            //Order Details
+            //stm = connection.prepareStatement("INSERT INTO OrderDetails (oid, itemCode, unitPrice, qty) VALUES (?,?,?,?)");
+
 
             for (OrderDetailDTO detail : orderDetails) {
-                stm.setString(1, orderId);
-                stm.setString(2, detail.getItemCode());
-                stm.setBigDecimal(3, detail.getUnitPrice());
-                stm.setInt(4, detail.getQty());
+                OrderDetailDTO orderDetailDTO = new OrderDetailDTO(orderId, detail.getItemCode(), detail.getQty(),detail.getUnitPrice());
+                boolean add1 = orderDetailsDAO.add(orderDetailDTO);
 
-                if (stm.executeUpdate() != 1) {
+                if (!add1) {
                     connection.rollback();
                     connection.setAutoCommit(true);
                     return false;
