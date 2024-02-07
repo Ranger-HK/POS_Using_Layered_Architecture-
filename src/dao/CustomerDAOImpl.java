@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class CustomerDAOImpl implements CrudDAO<CustomerDTO, String> {
+public class CustomerDAOImpl implements CustomerDAO{
 
     @Override
     public boolean add(CustomerDTO dto) throws SQLException, ClassNotFoundException {
@@ -42,16 +42,12 @@ public class CustomerDAOImpl implements CrudDAO<CustomerDTO, String> {
         return allCustomers;
     }
 
-
-
-   /*
     @Override
      public boolean ifCustomerExist(String id) throws SQLException, ClassNotFoundException {
-
       return  crudUtil.executeQuery("SELECT id FROM Customer WHERE id=?",id).next();
   }
 
-   @Override
+    @Override
     public String generateNewId() throws SQLException, ClassNotFoundException {
         ResultSet rst = crudUtil.executeQuery("SELECT id FROM Customer ORDER BY id DESC LIMIT 1;");
         if (rst.next()) {
@@ -61,7 +57,7 @@ public class CustomerDAOImpl implements CrudDAO<CustomerDTO, String> {
         } else {
             return "C001";
         }
-    }*/
+    }
 }
 
 

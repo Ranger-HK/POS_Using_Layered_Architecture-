@@ -40,13 +40,11 @@ public class ItemDAOImpl implements CrudDAO<ItemDTO, String> {
     }
 
 
-   /*
-     @Override
      public boolean ifItemExist(String code) throws SQLException, ClassNotFoundException {
        return  crudUtil.executeQuery("SELECT code FROM Item WHERE code=?",code).next();
     }
 
-    @Override
+
     public String generateNewId() throws SQLException, ClassNotFoundException {
         ResultSet rst = crudUtil.executeQuery("SELECT code FROM Item ORDER BY code DESC LIMIT 1;");
         if (rst.next()) {
@@ -56,7 +54,7 @@ public class ItemDAOImpl implements CrudDAO<ItemDTO, String> {
         } else {
             return "I001";
         }
-    }*/
+    }
 
 
 
